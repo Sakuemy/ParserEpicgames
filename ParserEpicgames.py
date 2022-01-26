@@ -1,5 +1,13 @@
-import requests, sys
+import requests, sys, os
 from bs4 import BeautifulSoup
+
+#f = open('log', '+')
+if os.path.exists('log.txt'):
+    f = open('log.txt', 'r')
+else:
+    f = open('log.txt', 'w')
+    f.close()
+    f = open('log.txt', 'r')
 
 url = "https://www.epicgames.com/store/ru/browse?sortBy=releaseDate&sortDir=DESC&priceTier=tierDiscouted&count=100&start=0"
 headers = {
@@ -13,6 +21,8 @@ soup = BeautifulSoup(src, "lxml")
 obj = soup.findAll("div", {"class": "css-hkjq8i"})
 #print(obj)
 c = 0
+w = ''
+t = 'true'
 for i in obj:
     x = ''
     c = c + 1
@@ -21,6 +31,22 @@ for i in obj:
         sys.exit()
     if i.find("div", {"class": "css-b0xoos"}).text == "-100 %":
         x = i.find("div", {"data-testid": "direction-auto"}).text
-        x = x + " (Скидка " + i.find("div", {"class": "css-b0xoos"}).text + ")"
-        print(x)
+        t = 'true'
+        for line in f:
+            if line == x :
+                t = 'false'
+                break
+        if t:
+            f.close()
+            f = open('log.txt', 'a')
+            f.write('\n' + x)
+            f.close()
+            f = open('log.txt', 'r')
+            x = x + " (Скидка " + i.find("div", {"class": "css-b0xoos"}).text + ")"
+            print(x)
+f.close()
 print("End program")
+
+
+
+#https://www.epicgames.com/store/ru/browse?sortBy=releaseDate&sortDir=DESC&priceTier=tierDiscouted&count=40&start=0
