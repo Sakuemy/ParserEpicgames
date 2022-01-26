@@ -41,6 +41,6 @@ for i in obj:
             f.close()
             f = open('log.txt', 'r')
             x = x + " (Скидка " + i.find("div", {"class": "css-b0xoos"}).text + ")\n\nhttps://www.epicgames.com/store/ru/browse?sortBy=releaseDate&sortDir=DESC&priceTier=tierDiscouted&count=40&start=0"
-            requests.get('https://api.telegram.org/bot5293918710:AAGcB8dqR5iqPl07AazOnZM7Mv4Fnfv79Hw/sendMessage?chat_id=671720173&text=' + x);
+            requests.get('https://api.telegram.org/botXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/sendMessage?chat_id=XXXXXXXXXX&text=' + x);
 f.close()
 print("\nEnd program")
