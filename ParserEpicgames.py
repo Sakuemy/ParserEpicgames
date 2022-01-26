@@ -31,9 +31,9 @@ for i in obj:
         x = i.find("div", {"data-testid": "direction-auto"}).text
         t = 'true'
         for line in f:
-            if line == x :
+            if line.replace('\n', '') == x :
                 t = 'false'
-                break
+                #break
         if t == 'true':
             f.close()
             f = open('log.txt', 'a')
@@ -41,6 +41,6 @@ for i in obj:
             f.close()
             f = open('log.txt', 'r')
             x = x + " (Скидка " + i.find("div", {"class": "css-b0xoos"}).text + ")\n\nhttps://www.epicgames.com/store/ru/browse?sortBy=releaseDate&sortDir=DESC&priceTier=tierDiscouted&count=40&start=0"
-            requests.get('https://api.telegram.org/botXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/sendMessage?chat_id=XXXXXXXXX&text=' + x);
+            requests.get('https://api.telegram.org/bot5293918710:AAGcB8dqR5iqPl07AazOnZM7Mv4Fnfv79Hw/sendMessage?chat_id=671720173&text=' + x);
 f.close()
 print("\nEnd program")
