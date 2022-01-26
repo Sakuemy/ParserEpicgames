@@ -1,7 +1,6 @@
 import requests, sys, os
 from bs4 import BeautifulSoup
 
-#f = open('log', '+')
 if os.path.exists('log.txt'):
     f = open('log.txt', 'r')
 else:
@@ -21,7 +20,6 @@ soup = BeautifulSoup(src, "lxml")
 obj = soup.findAll("div", {"class": "css-hkjq8i"})
 #print(obj)
 c = 0
-w = ''
 t = 'true'
 for i in obj:
     x = ''
@@ -36,17 +34,13 @@ for i in obj:
             if line == x :
                 t = 'false'
                 break
-        if t:
+        if t == 'true':
             f.close()
             f = open('log.txt', 'a')
             f.write('\n' + x)
             f.close()
             f = open('log.txt', 'r')
-            x = x + " (Скидка " + i.find("div", {"class": "css-b0xoos"}).text + ")"
-            print(x)
+            x = x + " (Скидка " + i.find("div", {"class": "css-b0xoos"}).text + ")\n\nhttps://www.epicgames.com/store/ru/browse?sortBy=releaseDate&sortDir=DESC&priceTier=tierDiscouted&count=40&start=0"
+            requests.get('https://api.telegram.org/botXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/sendMessage?chat_id=XXXXXXXXX&text=' + x);
 f.close()
-print("End program")
-
-
-
-#https://www.epicgames.com/store/ru/browse?sortBy=releaseDate&sortDir=DESC&priceTier=tierDiscouted&count=40&start=0
+print("\nEnd program")
